@@ -1,0 +1,169 @@
+<!-- SONNET HERO (text left + countdown right, vertically centered) -->
+<section
+  class="x-hero-sonnet x-hero-sonnet--split"
+  aria-label="New collection announcement"
+  data-deadline="2025-11-14T07:00:00Z"
+>
+  <!-- Background -->
+  <div class="xhs__media" aria-hidden="true">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0623/9718/6166/files/Dewatermark_1762243778547.jpg?v=1762243816"
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
+
+  <!-- Centered inner grid -->
+  <div class="xhs__inner">
+    <!-- Text left -->
+    <div class="xhs__content">
+      <p class="xhs__eyebrow">New collection is coming!</p>
+      <h1 class="xhs__title">Botanica Collection</h1>
+      <p class="xhs__desc">
+        Rooted in the calm of nature, the Botanica Collection celebrates organic form and effortless living. Airy layers, earthy palettes, and fluid silhouettes bring the serenity of the natural world into everyday moments.
+      </p>
+    </div>
+
+    <!-- Countdown right -->
+    <aside class="xhs__countdown" aria-label="Launch countdown">
+      <ul class="xhs-cd" role="timer" aria-live="polite">
+        <li class="xhs-cd__cell"><span class="xhs-cd__num" data-xhs-days>00</span><span class="xhs-cd__unit">day</span></li>
+        <li class="xhs-cd__sep" aria-hidden="true">:</li>
+        <li class="xhs-cd__cell"><span class="xhs-cd__num" data-xhs-hours>00</span><span class="xhs-cd__unit">hours</span></li>
+        <li class="xhs-cd__sep" aria-hidden="true">:</li>
+        <li class="xhs-cd__cell"><span class="xhs-cd__num" data-xhs-mins>00</span><span class="xhs-cd__unit">min</span></li>
+        <li class="xhs-cd__sep" aria-hidden="true">:</li>
+        <li class="xhs-cd__cell"><span class="xhs-cd__num" data-xhs-secs>00</span><span class="xhs-cd__unit">sec</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<style>
+/* ====== SONNET HERO (scoped) ====== */
+.x-hero-sonnet {
+  position: relative;
+  min-height: clamp(520px, 70vh, 860px);
+  color: #fff;
+  overflow: clip;
+  isolation: isolate;
+}
+
+/* Background */
+.x-hero-sonnet .xhs__media { position:absolute; inset:0; z-index:-2; }
+.x-hero-sonnet .xhs__media img {
+  width:100%; height:100%; display:block;
+  object-fit:cover; object-position:55% center;
+}
+.x-hero-sonnet::before {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.25) 0 25%,rgba(0,0,0,.28) 50%,rgba(0,0,0,0.28) 100%);
+  z-index:-1;
+}
+
+/* Layout: text left, timer right, centered vertically */
+.x-hero-sonnet .xhs__inner {
+  position:relative;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;          /* vertical centering */
+  justify-content:space-between;
+  gap:clamp(2rem,6vw,4rem);
+  padding:clamp(16px,5vw,64px);
+  min-height:inherit;
+}
+
+/* Text column */
+.x-hero-sonnet .xhs__content { max-width:70rem; }
+.x-hero-sonnet .xhs__eyebrow {
+  text-transform:uppercase; letter-spacing:.18em;
+  font-size:.875rem; opacity:.95; margin:0 0 .25rem;
+}
+.x-hero-sonnet .xhs__title {
+  margin:0 0 .5rem; font-weight:500; line-height:1.1;
+  font-size:clamp(1.75rem,4.6vw,3.6rem);
+}
+.x-hero-sonnet .xhs__desc {
+  margin:0; max-width:65ch; line-height:1.55;
+  font-size:clamp(1rem,1.4vw,1.25rem);
+}
+
+/* Countdown column */
+.x-hero-sonnet .xhs__countdown { justify-self:end; }
+.x-hero-sonnet .xhs-cd {
+  display:flex; align-items:center; gap:.5rem;
+  margin:0; padding:0; list-style:none;
+}
+.x-hero-sonnet .xhs-cd__cell {
+  display:flex; flex-direction:column; align-items:center;
+  padding:.6rem .7rem; border-radius:.6rem;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.18);
+}
+.x-hero-sonnet .xhs-cd__num {
+  font-variant-numeric:tabular-nums;
+  font-weight:400;
+  font-size:clamp(1.25rem,3.2vw,2.25rem);
+  line-height:1;
+}
+.x-hero-sonnet .xhs-cd__unit {
+  text-transform:uppercase; letter-spacing:.2em;
+  font-size:.72rem; opacity:.9; margin-top:.25rem;
+}
+.x-hero-sonnet .xhs-cd__sep { opacity:.8; user-select:none; }
+
+/* Responsive stacking */
+@media (max-width:900px){
+  .x-hero-sonnet .xhs__inner {
+    grid-template-columns:1fr;
+    text-align:center;
+    align-items:center;
+  }
+  .x-hero-sonnet .xhs__countdown { justify-self:center; margin-top:1.5rem; }
+}
+
+/* Accessibility helpers */
+@media (prefers-reduced-motion:reduce){ .x-hero-sonnet .xhs__media video{animation:none;} }
+@media (prefers-reduced-data:reduce){ .x-hero-sonnet .xhs__media video{display:none;} }
+</style>
+
+<script>
+/* ====== Countdown (scoped) ====== */
+(() => {
+  const root = document.querySelector('.x-hero-sonnet');
+  if (!root) return;
+  const deadlineAttr = root.getAttribute('data-deadline');
+  const deadline = deadlineAttr ? new Date(deadlineAttr) : null;
+  if (!deadline || isNaN(+deadline)) return;
+
+  const els = {
+    d: root.querySelector('[data-xhs-days]'),
+    h: root.querySelector('[data-xhs-hours]'),
+    m: root.querySelector('[data-xhs-mins]'),
+    s: root.querySelector('[data-xhs-secs]')
+  };
+  const pad2 = n => String(n).padStart(2, '0');
+
+  function tick() {
+    const now = new Date();
+    let diff = Math.max(0, deadline - now);
+
+    const days = Math.floor(diff / 864e5); diff -= days * 864e5;
+    const hours = Math.floor(diff / 36e5); diff -= hours * 36e5;
+    const mins = Math.floor(diff / 6e4); diff -= mins * 6e4;
+    const secs = Math.floor(diff / 1e3);
+
+    if (els.d) els.d.textContent = pad2(days);
+    if (els.h) els.h.textContent = pad2(hours);
+    if (els.m) els.m.textContent = pad2(mins);
+    if (els.s) els.s.textContent = pad2(secs);
+
+    if (deadline - now <= 0) clearInterval(tid);
+  }
+
+  tick();
+  const tid = setInterval(tick, 1000);
+})();
+</script>
