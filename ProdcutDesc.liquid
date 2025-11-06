@@ -1,6 +1,4 @@
-<!-- ====== HEAD (fonts + theme globals) ====== -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<!-- ====== HEAD (theme globals) ====== -->
 
 <!-- Theme globals required by product-form.js -->
 <script>
@@ -200,7 +198,6 @@
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
 
-  .pdp-scope body { font-family: 'Inter', sans-serif; }
   .pdp-scope .product-wrapper {
     display: flex; gap: 2rem; max-width: 1400px; margin: 0 auto; padding: 2rem 3rem;
     align-items: flex-start;
@@ -223,7 +220,7 @@
   .pdp-scope .product-form { flex: 0 0 50%; }
 
   .pdp-scope .product-label { font-size: 0.7rem; color: #999; letter-spacing: 1.2px; margin-bottom: 0.4rem; text-transform: uppercase; }
-  .pdp-scope .product-title { font-family: "Playfair Display", serif; font-size: 2rem; font-weight: 500; margin-bottom: 0.4rem; letter-spacing: 0.5px; }
+  .pdp-scope .product-title { font-family: var(--font-heading-family, inherit); font-size: 2rem; font-weight: 500; margin-bottom: 0.4rem; letter-spacing: 0.5px; }
   .pdp-scope .product-price { font-size: 1.3rem;margin-top: 0;  font-weight: 400; margin-bottom: 0.95rem; }
   .pdp-scope .product-rating { font-size: 0.95rem; margin-bottom: 0.7rem; }
   .pdp-scope .product-rating span { color: #aaa; margin-left: 0.25em; }
@@ -299,7 +296,6 @@
     margin-top: 1.5rem;
     padding-top: 0rem;
     border-top: 1px solid #e3e3e3;
-    font-family: 'Inter', sans-serif;
   }
   .pdp-scope .accordion { border-bottom: 1px solid #e3e3e3; }
   .pdp-scope .accordion-header {
